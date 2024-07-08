@@ -12,12 +12,6 @@ export async function POST(request: Request) {
     mode,
   });
   await transaction.save();
-
-  //   res.status(201).json({ success: true, data: transaction });
-  // } catch (error) {
-  //   console.error("Error saving transaction:", error);
-  //   res.status(400).json({ success: false });
-  // }
   return NextResponse.json({
     data,
   });

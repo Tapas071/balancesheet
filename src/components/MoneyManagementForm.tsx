@@ -18,39 +18,65 @@ const MoneyManagementForm = () => {
       [name]: value,
     });
   };
-  const url = "http://localhost:3000/api/moneyhandler";
+  const writeDateUrl = "http://localhost:3000/api/writedata";
+  const getLastRowUrl =
+    "http://localhost:3000/api/getLastRow?spreadsheetId=1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE&sheetName=Sheet1";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form Data:", formData);
 
-    // try {
-    //   // This is the endpoint where you want to send the data
-    //   const response = await axios.post(url, formData);
-    //   if (response.status === 200 || response.status === 201) {
-    //     alert("Transaction saved successfully!");
-    //   }
-    // } catch (error) {
-    //   alert("Error saving transaction. Please try again later.");
-    //   console.error("Error saving transaction:", error);
-    // }
+    //  make an api call to get the last fill row of the sheet
+    const lastRow = await fetch(getLastRowUrl, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("response", response);
+          return response.json();
+        }
+      })
+      .catch((error) => {
+        alert("Error fetching last row. Please try again later.");
+        console.error("Error fetching last row:", error);
+      });
+    const lastRowData = lastRow.result;
+    const rangeee = `Sheet1!A${lastRowData + 2}:D${lastRowData + 2}`;
+    // console.log("lastRowData", rangeee);
 
-    // calling api without axios
-    await fetch("api/testing", {
+    // api call for google sheets using fetch method
+    const dataOfSheet = {
+      spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
+      range: rangeee,
+      values: [
+        [formData.location, formData.amount, formData.time, formData.mode],
+      ],
+    };
+    await fetch(writeDateUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(dataOfSheet),
     })
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
-          alert("Transaction saved successfully!");
+          // alert("write date Transaction saved successfully!");
         }
       })
       .catch((error) => {
-        alert("Error saving transaction. Please try again later.");
-        console.error("Error saving transaction:", error);
+        alert(
+          "Error  in write data saving transaction. Please try again later."
+        );
+        // console.error("Error saving transaction:", error);
+      })
+      .finally(() => {
+        setFormData({
+          location: "",
+          amount: "",
+          time: "",
+          mode: "",
+        });
       });
   };
 

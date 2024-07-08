@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "finance-excel-project",
+  "private_key_id": "bff324d918d971d98724e58f457c3c89ed089de9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCtZ0HNLUYZBdaG\nhxZoD3I4gxJ1twNeXOeHWyR2vsHHNu6/JlvjlbDDjBrkzExU8JNkfncdcEPWmAJ5\nKhYd3lkfWCeVIv+f7tJS+meqePnmSWAKJ7lLEt97U12tkkKgw4Fejr+tivtc+jqC\n8x1E266O2C4S1Tcl9rVe/lh6yLk7nsrRg6aDXso/XvFpQJs8Cd6RSY7PmN1jL5an\nOI46DS3STvo+ckWaK1SrnOkPyKuGySDxv6HXdGjMEnVp4UvCThbZ7qsqn3QcA23e\nflZrTegmz95VSS6Wh3Wmm+/YbvXDBg8uq9lxgD4JTJZ2JU2WmM2rVJ3ijIH61rgP\nZ0jLHbabAgMBAAECggEAAxYDBMdufO7ZVNw97izVh+NFRn+y+VCb9OZkArz9robw\nFB92+S47zsRv4hcvWz+gz+QJnfuBKZDbp75eVbppnvYvANIg9ylakuF5S35gVtSC\nzLYiRQ9ul2pHZi8Ogn/tjc+VN7Mb1W7FRc6qfFmQhLhHhvbxG/raWs4Z/a1pe9cd\nvkSqzIi99JQ2Hy4kKCSVwvPlD/zvQDQF7uFfCOyHAwxdqZdp84eflIlID2w3BD4n\nxgAxzsVs7m3AfyKVVup5P7kDXjB8RPkn0H7IgaEUK/HstE4xkSKHDAafxV2K3EBH\nj/CQ8amSLL4kKKmmmFoDVCGNETyXHptZUCEZUg8pMQKBgQDphBwkBdzPxKsqdXQf\nXwnQ4a2CvHgFd9XV49RPBPHSRKVtd02PAXB7eAuCWtV8wNquZAbIpEC9fJ/GkXgm\nWdiveVmdexZakuneVr9JAr4XbiNvSymIlyrrEHIJJjLAex1JOVeXZq4MKGOP/xhI\nqi5p1M5hx+t/Rc8GscZRgmgpmQKBgQC+GXDu3/DJiRQzE1kH1hs320pkoOuZ2KI6\ndKx6Z8JU158BMNkpjJraC1u24tYdCk1DnxGjW+chy2I8zs8IQKAYY/aiT1t9vgzg\nc+8e4JF39/BoHJVS4nDqBFjquPh7ascV84uFqyf6f3W9oxBmvjBePvSYaP1D2lBc\nrvg5iSJKUwKBgQCmRPLkk2gOaDKYINl2HO2YVZh+JkQvYIxZp8dcHGEzHr3Lm88V\nrCizQV6wiozIL2mGEqLh6lJOmZYKhTnP1Nl82CL/Bs174G+1aH77NYC0ni+M5y/D\nmh9tEGCiMxigBQltQe8kVnBHJ9r8hN59nu89W9E3vmnoTYSDd8GF+BzCwQKBgQC1\n7x9YXtbR6vF8GG5Cw7T09ljyidgyO1S34WYZGCiyjlJND3UnALxLJke2ds44qN1d\ndGWrFI/WlhIE5GDcIw2VikZG/PAxHayxPAOEZ6SRTqe03HZFBxbNwS9gJXsakwzK\ng3Xqje4LHeWPgvp1elxMNrBdFU4enFgA/Cvw1MAOpQKBgFcfVHI75lM4UukoyC/t\nYslrWdd7J4K8cvwii1KlXoxmMQyx5y99tf0wtV2mOpTjCgmgwwcRH1GeJTMU3Wi4\nP5wWtXZmIIH6sKF+Kym4b8MlI/EBbmzEKSqweaJf4z9k3fIyJH0+uBfE4qp9+/QX\nO/DKsy2908/i8aL/VboC3ANF\n-----END PRIVATE KEY-----\n",
+  "client_email": "excel-finance-project@finance-excel-project.iam.gserviceaccount.com",
+  "client_id": "117410027770323538530",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/excel-finance-project%40finance-excel-project.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
