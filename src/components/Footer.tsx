@@ -81,6 +81,13 @@ const Footer = () => {
         <div className="mt-8 text-center text-gray-400">
           &copy; 2024 BalanceSheet. All rights reserved.
         </div>
+        <div className="mt-4 text-center text-gray-300">
+          <p className="text-sm">
+            <span className="animate-pulse">
+              Built with 💖 by Tapas Mondal
+            </span>
+          </p>
+        </div>
       </div>
     </footer>
   );

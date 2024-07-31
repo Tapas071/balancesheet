@@ -35,7 +35,7 @@ export async function writeBalanceSheetData(
     console.log(response.data);
     return response.data;
   } catch (error) {
-    console.error("Error writing to spreadsheet:", error);
+    console.error("Error writing to spreadsheet2:", error);
     throw error;
   }
 }

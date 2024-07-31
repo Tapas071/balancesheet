@@ -7,6 +7,7 @@ const MoneyManagementForm = () => {
     amount: "",
     time: "",
     mode: "",
+    type:"",
   });
 
   const handleChange = (
@@ -19,6 +20,7 @@ const MoneyManagementForm = () => {
     });
   };
   const writeDateUrl = "http://localhost:3000/api/writedata";
+  const moneyhanlerurl = "http://localhost:3000/api/moneyhandler";
   const getLastRowUrl =
     "http://localhost:3000/api/getLastRow?spreadsheetId=1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE&sheetName=Sheet1";
 
@@ -41,7 +43,7 @@ const MoneyManagementForm = () => {
         console.error("Error fetching last row:", error);
       });
     const lastRowData = lastRow.result;
-    const rangeee = `Sheet1!A${lastRowData + 2}:D${lastRowData + 2}`;
+    const rangeee = `Sheet1!A${lastRowData + 2}:E${lastRowData + 2}`;
     // console.log("lastRowData", rangeee);
 
     // api call for google sheets using fetch method
@@ -49,9 +51,34 @@ const MoneyManagementForm = () => {
       spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
       range: rangeee,
       values: [
-        [formData.location, formData.amount, formData.time, formData.mode],
+        [formData.location, formData.amount, formData.time, formData.mode , formData.type],
       ],
     };
+    const moneyhanlerData = {
+      "location" : formData.location,
+      "amount" :formData.amount,
+      "time" : formData.time,
+      "mode": formData.mode,
+      "type":formData.type
+    }
+    await fetch(moneyhanlerurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(moneyhanlerData),
+    })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          // alert("write date Transaction saved successfully!");
+        }
+      })
+      .catch((error) => {
+        alert(
+          "Error  in write data saving transaction. Please try again later."
+        );
+        // console.error("Error saving transaction:", error);
+      });
     await fetch(writeDateUrl, {
       method: "POST",
       headers: {
@@ -71,11 +98,13 @@ const MoneyManagementForm = () => {
         // console.error("Error saving transaction:", error);
       })
       .finally(() => {
+        alert("form has been submitted successfully")
         setFormData({
           location: "",
           amount: "",
           time: "",
           mode: "",
+          type:"",
         });
       });
   };
@@ -156,6 +185,29 @@ const MoneyManagementForm = () => {
             <option value="debit_card">Debit Card</option>
             <option value="bank_transfer">Bank Transfer</option>
             <option value="mobile_payment">Mobile Payment</option>
+          </select>
+        </div>
+        <div className="mb-4">
+          <label
+            htmlFor="mode"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Transaction type
+          </label>
+          <select
+            name="type"
+            id="type"
+            value={formData.type}
+            onChange={handleChange}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 text-gray-600"
+            required
+          >
+            {" "}
+            <option value="">Select mode</option>
+            <option value="Fooding">Fooding</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Other">Other</option>
           </select>
         </div>
         <button

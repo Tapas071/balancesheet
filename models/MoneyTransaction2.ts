@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MoneyTransactionSchema = new mongoose.Schema({
+const MoneyTransaction2Schema = new mongoose.Schema({
   location: {
     type: String,
     required: true,
@@ -23,5 +23,5 @@ const MoneyTransactionSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.models.MoneyTransaction ||
-  mongoose.model("MoneyTransaction", MoneyTransactionSchema);
+export default mongoose.models.MoneyTransaction2 ||
+  mongoose.model("MoneyTransaction2", MoneyTransaction2Schema);

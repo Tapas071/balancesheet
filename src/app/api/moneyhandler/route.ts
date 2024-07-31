@@ -1,132 +1,85 @@
-// import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
-// export async function GET() {
-//   return NextResponse.json({
-//     message: "Hello from Next.js API!",
-//     timestamp: new Date().toISOString(),
-//   });
-// }
-
-// import { NextApiRequest, NextApiResponse } from "next";
-// import dbConnect from "../../../../lib/dbConnect";
-// import MoneyTransaction from "../../../../models/MoneyTransaction";
-
-// export async function POST(req: NextApiRequest, res: NextApiResponse) {
-//   await dbConnect();
-//   // console.log(req);
-//   // return NextResponse.json(req.body);
-//   try {
-//     const transaction = new MoneyTransaction(req.body);
-//     console.log(" the transaction is --> " + transaction);
-//     await transaction.save();
-//     console.log(" the transaction is save --> " + transaction);
-//     res.status(201).json({ success: true, data: transaction });
-//   } catch (error) {
-//     res.status(400).json({ success: false });
-//   }
-//   return NextResponse.json({
-//     message: "Hello from Next.js API!",
-//     timestamp: new Date().toISOString(),
-//   });
-// }
-
-// export default async function moneyhandler(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   const { method } = req;
-
-//   await dbConnect();
-
-//   switch (method) {
-//     case "POST":
-//       try {
-//         const transaction = new MoneyTransaction(req.body);
-//         await transaction.save();
-//         res.status(201).json({ success: true, data: transaction });
-//       } catch (error) {
-//         res.status(400).json({ success: false });
-//       }
-//       break;
-//     default:
-//       res.status(400).json({ success: false });
-//       break;
-//   }
-// }
-
-// pages/api/your-api-endpoint.ts
-
-// import { NextApiRequest, NextApiResponse } from "next";
-// import dbConnect from "../../../../lib/dbConnect";
-// import MoneyTransaction from "../../../../models/MoneyTransaction";
-
-// export default async function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse
-// ) {
-//   if (req.method === "POST") {
-//     try {
-//       await dbConnect();
-
-//       const { location, amount, time, mode } = req.body;
-
-//       const transaction = new MoneyTransaction({
-//         location,
-//         amount,
-//         time,
-//         mode,
-//       });
-
-//       await transaction.save();
-
-//       res.status(201).json({ success: true, data: transaction });
-//     } catch (error) {
-//       console.error("Error saving transaction:", error);
-//       res.status(400).json({ success: false });
-//     }
-//   } else {
-//     res.setHeader("Allow", ["POST"]);
-//     res.status(405).end(`Method ${req.method} Not Allowed`);
-//   }
-// }
-
-// pages/api/moneyhandler/route.ts
-
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../../lib/dbConnect";
 import MoneyTransaction from "../../../../models/MoneyTransaction";
+import MoneyTransaction2 from "../../../../models/MoneyTransaction2";
 
 export async function POST(req: Request) {
   // await dbConnect();
   // const data = await req.body;
-  const data = await req.json();
-  console.log(" the data is --> " + data);
+  // console.log(data)
+  // cons
+const data = await req.json();
+// 
+  // console.log(" the data is --> " + data);
+      // await dbConnect();
+
+      // // const { location, amount, time, mode } = req.body;
+
+      // const transaction = new MoneyTransaction({
+      //   location,
+      //   amount,
+      //   time,
+      //   mode,
+      // });
+      const location = data.location;
+      const amount = data.amount;
+      const time = data.time;
+      const mode = data.mode;
+      const type = data.type;
+
+      // await transaction.save();
+
   // console.log(" the data is --> " + data.location);
   // const { location, amount, time, mode } = req.body;
   // console.log(" the transaction is --> " + req.body.location);
-  return NextResponse.json({
-    location: "kolkata",
-    message: "Hello from Next.js API!",
-    timestamp: new Date().toISOString(),
-  });
+  // return NextResponse.json({
 
-  // try {
-  //   await dbConnect();
-
-  //   const { location, amount, time, mode } = req.body;
-
-  //   const transaction = new MoneyTransaction({
   //     location,
-  //     amount,
-  //     time,
-  //     mode,
-  //   });
+  //   amount,
+  //   time,
+  //   mode,
+  // });
 
-  //   await transaction.save();
+  // const [location , amount, time, mode ] = data;
 
-  //   res.status(201).json({ success: true, data: transaction });
-  // } catch (error) {
-  //   console.error("Error saving transaction:", error);
-  //   res.status(400).json({ success: false });
-  // }
+  try {
+    await dbConnect();
+
+    // const { location, amount, time, mode } = req.body;
+
+    // const transaction = new MoneyTransaction({
+    //   location,
+    //   amount,
+    //   time,
+    //   mode,
+    //   type,
+    // });
+
+    // await transaction.save();
+    const transaction2 = new MoneyTransaction2({
+      location,
+      amount,
+      time,
+      mode,
+      type,
+    });
+    await transaction2.save();
+    return NextResponse.json({
+      location,
+      amount,
+      time,
+      mode,
+      type,
+    });
+
+
+    // res.status(201).json({ success: true, data: transaction });
+  } catch (error) {
+    console.error("Error saving transaction:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
 }
