@@ -1,5 +1,6 @@
 import { use, useState } from "react";
 import axios from "axios";
+const URL = process.env.BASE_URL;
 
 const MoneyManagementForm = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ const MoneyManagementForm = () => {
       [name]: value,
     });
   };
-  const writeDateUrl = "http://localhost:3000/api/writedata";
+  const writeDateUrl = `${URL}/api/writedata`;
   const moneyhanlerurl = "http://localhost:3000/api/moneyhandler";
   const getLastRowUrl =
     "http://localhost:3000/api/getLastRow?spreadsheetId=1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE&sheetName=Sheet1";

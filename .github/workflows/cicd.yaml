@@ -1,0 +1,35 @@
+name: Deploy Next.js application
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout Source
+        uses: actions/checkout@v4
+      - name : Create the .env file
+        run: 
+            |
+            touch .env
+            echo "${{secrets.PROD_ENV_FILE}}" > .env
+      - name: Build docker image
+        run: docker build -t tapas710/balancesheet .
+      - name: Login to docker hub
+        run: docker login -u tapas710 -p Tapas710@
+      - name: Publish image to docker hub
+        run: docker push tapas710/balancesheet
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull tapas710/balancesheet
+      - name: Delete old container
+        run: docker rm -f nextjs-app-container-balancesheet  
+      - name: Run docker container
+        run: docker run -d -p 3000:3000 --name nextjs-app-container-balancesheet tapas710/balancesheet
