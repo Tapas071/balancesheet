@@ -37,6 +37,6 @@ export async function POST(request: Request) {
   //   res.status(400).json({ success: false });
   // }
   return NextResponse.json({
-    data,
+    status: 200,
   });
 }
