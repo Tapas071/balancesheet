@@ -1,6 +1,7 @@
 import { use, useState } from "react";
 import axios from "axios";
-const URL = process.env.BASE_URL;
+const BASE_URL = process.env.BASE_URL;
+
 
 const MoneyManagementForm = () => {
   const [formData, setFormData] = useState({
@@ -20,20 +21,23 @@ const MoneyManagementForm = () => {
       [name]: value,
     });
   };
-  const writeDateUrl = `${URL}/api/writedata`;
-  const moneyhanlerurl = "http://localhost:3000/api/moneyhandler";
+  console.log("BASE_URL", BASE_URL);
+  const writeDateUrl = `${BASE_URL}/api/writedata`;
+  const moneyhanlerurl = `${BASE_URL}/api/moneyhandler`;
   const getLastRowUrl =
-    "http://localhost:3000/api/getLastRow?spreadsheetId=1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE&sheetName=Sheet1";
-
+    `${BASE_URL}/api/getLastRow`;
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
-
     //  make an api call to get the last fill row of the sheet
     const lastRow = await fetch(getLastRowUrl, {
-      method: "GET",
+      method: "POST",
+      body: JSON.stringify({
+        spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
+        sheetName: "Sheet1",
+      }),
     })
       .then((response) => {
+        // console.log("response2", response);
         if (response.status === 200) {
           console.log("response", response);
           return response.json();
@@ -44,6 +48,7 @@ const MoneyManagementForm = () => {
         console.error("Error fetching last row:", error);
       });
     const lastRowData = lastRow.result;
+    // console.log("lastRowData", lastRowData);
     const rangeee = `Sheet1!A${lastRowData + 2}:E${lastRowData + 2}`;
     // console.log("lastRowData", rangeee);
 
