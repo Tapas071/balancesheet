@@ -1,7 +1,7 @@
 import { use, useState } from "react";
 import axios from "axios";
 // const BASE_URL = process.env.BASE_URL;
-const BASE_URL = "65.0.87.86";
+const BASE_URL = "http://65.0.87.86";
 
 
 const MoneyManagementForm = () => {
