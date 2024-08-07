@@ -1,7 +1,7 @@
 import { use, useState } from "react";
 import axios from "axios";
 // const BASE_URL = process.env.BASE_URL;
-const BASE_URL = "http://65.0.87.86";
+const BASE_URL = "http://65.0.87.86:3000";
 
 
 const MoneyManagementForm = () => {
@@ -22,7 +22,7 @@ const MoneyManagementForm = () => {
       [name]: value,
     });
   };
-  console.log("BASE_URL", BASE_URL);
+  // console.log("BASE_URL", BASE_URL);
   const writeDateUrl = `${BASE_URL}/api/writedata`;
   const moneyhanlerurl = `${BASE_URL}/api/moneyhandler`;
   const getLastRowUrl =
