@@ -12,47 +12,10 @@ const Footer = () => {
             </p>
           </div>
           <div className="mb-6 md:mb-0">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
-            <ul className="mt-2">
-              <li>
-                <Link href="/" className="hover:underline">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:underline">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:underline">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:underline">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="mb-6 md:mb-0">
-            <h3 className="text-lg font-semibold">Follow Us</h3>
+            <h3 className="text-lg font-semibold">Follow me on</h3>
             <ul className="mt-2 flex space-x-4">
               <li>
-                <Link href="#">
-                  <svg
-                    fill="currentColor"
-                    className="h-6 w-6 hover:text-gray-400"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24h11.495v-9.294H9.847v-3.622h2.973V8.413c0-2.94 1.796-4.548 4.42-4.548 1.256 0 2.334.093 2.649.135v3.07l-1.818.001c-1.426 0-1.702.677-1.702 1.67v2.19h3.406l-.443 3.622h-2.963V24h5.803c.728 0 1.325-.597 1.325-1.324V1.325C24 .597 23.403 0 22.675 0z" />
-                  </svg>
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
+                <Link href="https://x.com/ImTapasMondal">
                   <svg
                     fill="currentColor"
                     className="h-6 w-6 hover:text-gray-400"
@@ -64,7 +27,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="#">
+                <Link href="https://www.linkedin.com/in/tapas-mondal-a12834225/">
                   <svg
                     fill="currentColor"
                     className="h-6 w-6 hover:text-gray-400"
@@ -75,6 +38,20 @@ const Footer = () => {
                   </svg>
                 </Link>
               </li>
+              {/* do it for github */}
+              <li>
+  <Link href="https://github.com/Tapas071">
+    <svg
+      fill="currentColor"
+      className="h-6 w-6 hover:text-gray-400"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.38.6.11.82-.26.82-.58v-2.02c-3.34.73-4.04-1.6-4.04-1.6-.55-1.39-1.35-1.76-1.35-1.76-1.1-.75.08-.74.08-.74 1.21.09 1.84 1.24 1.84 1.24 1.08 1.85 2.83 1.32 3.52 1.01.11-.78.42-1.32.76-1.62-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.48 11.48 0 0 1 3.01-.4c1.02.01 2.05.14 3.01.4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.26 2.87.13 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.47 5.92.43.37.82 1.1.82 2.23v3.29c0 .32.22.69.83.58A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  </Link>
+</li>
+
             </ul>
           </div>
         </div>
