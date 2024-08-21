@@ -16,13 +16,14 @@ type arrayType = {
     mode: string;
     type: string;
     };
+    const PROD_URL = "http://65.0.87.86:3000/api/lastFiveTransaction";
 
 export  function CarouselSpacing() {
     const [lastFiveTransaction, setLastFiveTransaction] = useState<arrayType[]>([]);
     const [loading, setLoading] = React.useState<boolean>(true);
     React.useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('/api/lastFiveTransaction');
+            const res = await fetch(PROD_URL);
             const data = await res.json();
             setLastFiveTransaction(data.Details);
             }

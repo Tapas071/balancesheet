@@ -212,6 +212,8 @@ type arrayType = {
   visitors: number;
   fill: string;
 };
+const PROD_URL = "http://65.0.87.86:3000/api/topicWiseExpense";
+const DEV_URL = "http://localhost:3000/api/topicWiseExpense";
 
 export function Chart() {
   const [chart_Values, setChartValues] = useState<arrayType[]>([]);
@@ -219,7 +221,7 @@ export function Chart() {
 
   useEffect(() => {
     const fetchExpenseData = async () => {
-      const response = await fetch("http://localhost:3000/api/topicWiseExpense");
+      const response = await fetch(PROD_URL);
       const data = await response.json();
       console.log(data.ExpenseType);
 
