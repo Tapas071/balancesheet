@@ -41,7 +41,7 @@
 
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/balancesheet.git
+git clone https://github.com/Tapas071/balancesheet
 cd balancesheet
 ```
 
@@ -69,9 +69,6 @@ MONGODB_URI=your_mongodb_uri
 GOOGLE_CLIENT_ID=your_google_client_id
 GOOGLE_CLIENT_SECRET=your_google_client_secret
 
-# AWS
-AWS_ACCESS_KEY=your_aws_access_key
-AWS_SECRET_KEY=your_aws_secret_key
 ```
 
 5. Run the development server
@@ -82,6 +79,7 @@ yarn dev
 ```
 
 6. Open [http://localhost:3000](http://localhost:3000) in your browser
+7. All Scrum link (for core team) : https://www.notion.so/9059103e642a441188b5cc3f86b916dd?v=03d46ebc21044d2c94edb7b2e02a36c0&p=05beaf53e967445dbc87827af5023722&pm=s
 
 ## 🔄 CI/CD Pipeline
 
