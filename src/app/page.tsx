@@ -11,11 +11,9 @@ const Home = () => {
     <>
       <div className=" flex flex-col">
         <Navbar />
-        {/* <Content /> */}
         <div className=" mx-auto">
           <MoneyManagementForm />
         </div>
-
         <Footer />
       </div>
     </>

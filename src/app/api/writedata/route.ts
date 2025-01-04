@@ -25,6 +25,9 @@ export async function POST(request: Request) {
   //   });
   // console.log("lastRow", lastRow);
   try {
+    console.log(" into the try function ", values);
+    console.log("the spreardSheetId is " + spreadsheetId);
+    console.log(" and the range is "+ range);
     const result = await writeBalanceSheetData(spreadsheetId, range, values);
     //   res.status(200).json(result);
   } catch (error) {
