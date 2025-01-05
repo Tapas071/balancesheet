@@ -2,7 +2,7 @@
   "name": "balancesheet",
   "version": "0.1.0",
   "private": true,
-  "type":"module",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,13 +10,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@shadcn/ui": "^0.0.4",
     "axios": "^1.7.2",
     "googleapis": "^140.0.1",
     "lru-cache": "^11.0.0",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "recharts": "^2.15.0"
   },
   "devDependencies": {
     "@types/node": "^20",

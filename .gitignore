@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.balancesheet_secret.json
 
 # testing
 /coverage

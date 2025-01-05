@@ -5,50 +5,22 @@ import MoneyTransaction from "../../../../models/MoneyTransaction";
 import MoneyTransaction2 from "../../../../models/MoneyTransaction2";
 
 export async function POST(req: Request) {
-  // await dbConnect();
-  // const data = await req.body;
-  // console.log(data)
-  // cons
+
 const data = await req.json();
-// 
-  // console.log(" the data is --> " + data);
-      // await dbConnect();
 
-      // // const { location, amount, time, mode } = req.body;
-
-      // const transaction = new MoneyTransaction({
-      //   location,
-      //   amount,
-      //   time,
-      //   mode,
-      // });
       const location = data.location;
       const amount = data.amount;
       const time = data.time;
       const mode = data.mode;
       const type = data.type;
+      
+      try {
 
-      // await transaction.save();
-
-  // console.log(" the data is --> " + data.location);
+  await dbConnect();
+  
   // const { location, amount, time, mode } = req.body;
-  // console.log(" the transaction is --> " + req.body.location);
-  // return NextResponse.json({
-
-  //     location,
-  //   amount,
-  //   time,
-  //   mode,
-  // });
-
-  // const [location , amount, time, mode ] = data;
-
-  try {
-    await dbConnect();
-
-    // const { location, amount, time, mode } = req.body;
-
-    // const transaction = new MoneyTransaction({
+  
+  // const transaction = new MoneyTransaction({
     //   location,
     //   amount,
     //   time,
@@ -66,15 +38,12 @@ const data = await req.json();
     });
     await transaction2.save();
     return NextResponse.json({
-      location,
-      amount,
-      time,
-      mode,
-      type,
-    });
+     status: 200
+     ,
+     transaction2
+    }
+      );
 
-
-    // res.status(201).json({ success: true, data: transaction });
   } catch (error) {
     console.error("Error saving transaction:", error);
     return NextResponse.json(

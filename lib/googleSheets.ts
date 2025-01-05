@@ -59,7 +59,8 @@ export async function getLastRow(
     if (rows && rows.length) {
       return rows.length - 1;
       // return rows[rows.length - 1][0]; // Return the first column of the last row
-    } else {
+    }
+     else {
       return null;
     }
   } catch (error) {
