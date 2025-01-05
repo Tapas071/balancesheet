@@ -1,13 +1,5 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableContainer,
-} from '@shadcn/ui';
 
 interface Transaction {
   _id: string;
@@ -21,13 +13,19 @@ interface Transaction {
 
 const PaymentsTable: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 5;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('http://localhost:3000/api/getAllTrans');
         const data: Transaction[] = await response.json();
-        setTransactions(data);
+        // Sort transactions by time (newest first)
+        const sortedTransactions = data.sort(
+          (a, b) => new Date(b.time).getTime() - new Date(a.time).getTime()
+        );
+        setTransactions(sortedTransactions);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -36,33 +34,63 @@ const PaymentsTable: React.FC = () => {
     fetchData();
   }, []);
 
+  const indexOfLastTransaction = currentPage * transactionsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+  const currentTransactions = transactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Payment History</h2>
-      <TableContainer className="rounded-md">
-        <Table className="table-auto">
-          <TableHead>
-            <TableRow>
-              <TableCell className="text-left font-semibold">Date/Time</TableCell>
-              <TableCell className="text-left font-semibold">Amount</TableCell>
-              <TableCell className="text-left font-semibold">Mode</TableCell>
-              <TableCell className="text-left font-semibold">Type</TableCell>
-              <TableCell className="text-left font-semibold">Location</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {transactions.map((transaction) => (
-              <TableRow key={transaction._id}>
-                <TableCell>{new Date(transaction.time).toLocaleDateString()}</TableCell>
-                <TableCell>{transaction.amount}</TableCell>
-                <TableCell>{transaction.mode}</TableCell>
-                <TableCell>{transaction.type}</TableCell>
-                <TableCell>{transaction.location}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
+        Payment History
+      </h2>
+      <table className="table-auto w-full rounded-md shadow-md">
+        <thead>
+          <tr className="bg-gray-100 text-left font-semibold">
+            <th className="px-4 py-2">Date/Time</th>
+            <th className="px-4 py-2">Amount</th>
+            <th className="px-4 py-2">Mode</th>
+            <th className="px-4 py-2">Type</th>
+            <th className="px-4 py-2">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentTransactions.map((transaction) => (
+            <tr
+              key={transaction._id}
+              className="border-b border-gray-200 hover:bg-gray-100" // Changed hover color
+            >
+              <td className="px-4 py-2">{new Date(transaction.time).toLocaleDateString()}</td>
+              <td className="px-4 py-2">{transaction.amount}</td>
+              <td className="px-4 py-2">{transaction.mode}</td>
+              <td className="px-4 py-2">{transaction.type}</td>
+              <td className="px-4 py-2">{transaction.location}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="mt-4 flex justify-center">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2"
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={indexOfLastTransaction >= transactions.length}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

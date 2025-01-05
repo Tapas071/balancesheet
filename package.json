@@ -12,7 +12,10 @@
   "dependencies": {
     "@shadcn/ui": "^0.0.4",
     "axios": "^1.7.2",
+    "file-saver": "^2.0.5",
     "googleapis": "^140.0.1",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "lru-cache": "^11.0.0",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
@@ -21,6 +24,7 @@
     "recharts": "^2.15.0"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

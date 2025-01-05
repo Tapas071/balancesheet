@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import TypeOfExpensePieChart from "@/components/TypeOfExpensePieChart";
 import DayWiseExpensesLineChart from "@/components/DayWiseExpensesLineChart";
 import ModeOfPaymentPieChart from "@/components/ModeOfPaymentPieChart";
+import PaymentsTable from "@/components/TransTable";
+import AddMoneyFormWrapper from "@/components/AddMoneyFormWrapper";
 
 const Home = () => {
   return (
@@ -15,10 +17,12 @@ const Home = () => {
       <div className=" flex flex-col">
         <Navbar />
         <div className=" mx-auto">
-          <MoneyManagementForm />
+          <AddMoneyFormWrapper/>
+          <PaymentsTable/>
           <TypeOfExpensePieChart/>
           <ModeOfPaymentPieChart/>
           <DayWiseExpensesLineChart/>
+          {/* <DownloadSpreadsheet/> */}
         </div>
         <Footer />
       </div>
