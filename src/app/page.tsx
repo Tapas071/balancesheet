@@ -10,6 +10,7 @@ import DayWiseExpensesLineChart from "@/components/DayWiseExpensesLineChart";
 import ModeOfPaymentPieChart from "@/components/ModeOfPaymentPieChart";
 import PaymentsTable from "@/components/TransTable";
 import AddMoneyFormWrapper from "@/components/AddMoneyFormWrapper";
+import DownloadSpreadsheet from "@/components/DownloadSpreadsheet";
 
 const Home = () => {
   return (
@@ -22,7 +23,7 @@ const Home = () => {
           <TypeOfExpensePieChart/>
           <ModeOfPaymentPieChart/>
           <DayWiseExpensesLineChart/>
-          {/* <DownloadSpreadsheet/> */}
+          <DownloadSpreadsheet/>
         </div>
         <Footer />
       </div>
