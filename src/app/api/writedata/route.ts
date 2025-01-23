@@ -3,6 +3,7 @@ import dbConnect from "../../../../lib/dbConnect";
 import MoneyTransaction from "../../../../models/MoneyTransaction";
 import { getLastRow, writeBalanceSheetData } from "../../../../lib/googleSheets";
 import { Result } from "postcss";
+import axios from "axios";
 export async function POST(request: Request) {
 
   const data = await request.json();
@@ -15,8 +16,14 @@ export async function POST(request: Request) {
       const getRange1 = Number(getRange) + 2;
       modifiedRange = `Sheet1!A${(getRange1)}:D${getRange1}`;
     }
-    const result = await writeBalanceSheetData(spreadsheetId, modifiedRange, values);
+    const location = values[0].location;
+    const amount = values[0].amount;
+    const time = values[0].time;
+    const mode = values[0].mode;
+    const type = values[0].type;
 
+    // console.log(addToDB);
+    const result = await writeBalanceSheetData(spreadsheetId, modifiedRange, values);
   } catch (error) {
   }
   return NextResponse.json({
