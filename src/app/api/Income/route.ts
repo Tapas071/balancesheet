@@ -30,11 +30,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             status: 200,
             transaction
         });
-
-        
     } catch (error) {
         console.error("Error saving transaction:", error);  
     }
-
-
 }

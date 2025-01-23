@@ -1,16 +1,22 @@
+"use client"
 import { use, useState } from "react";
 import axios from "axios";
 // const BASE_URL = process.env.BASE_URL;
-const BASE_URL = "http://65.0.87.86:3000";
+// const BASE_URL = "http://65.0.87.86:3000";
+const BASE_URL = "http://localhost:3000";
 
-
-const MoneyManagementForm = () => {
+interface MoneyManagementFormProps {
+  handleCloseForm: () => void;
+}
+const MoneyManagementForm: React.FC<MoneyManagementFormProps> = ({
+  handleCloseForm,
+}) => {
   const [formData, setFormData] = useState({
     location: "",
     amount: "",
     time: "",
     mode: "",
-    type:"",
+    type: "",
   });
 
   const handleChange = (
@@ -25,100 +31,169 @@ const MoneyManagementForm = () => {
   // console.log("BASE_URL", BASE_URL);
   const writeDateUrl = `${BASE_URL}/api/writedata`;
   const moneyhanlerurl = `${BASE_URL}/api/moneyhandler`;
-  const getLastRowUrl =
-    `${BASE_URL}/api/getLastRow`;
+  const getLastRowUrl = `${BASE_URL}/api/getLastRow`;
   const handleSubmit = async (e: React.FormEvent) => {
+    // console.log("formData", formData);
     e.preventDefault();
-    //  make an api call to get the last fill row of the sheet
-    const lastRow = await fetch(getLastRowUrl, {
-      method: "POST",
-      body: JSON.stringify({
-        spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
-        sheetName: "Sheet1",
-      }),
-    })
-      .then((response) => {
-        // console.log("response2", response);
-        if (response.status === 200) {
-          console.log("response", response);
-          return response.json();
-        }
-      })
-      .catch((error) => {
-        alert("Error fetching last row. Please try again later.");
-        console.error("Error fetching last row:", error);
+    // console.log("formData", formData);
+    const spreadsheetId = "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE";
+    const range = "Sheet1!A5:D5";
+    const values = [
+      [formData.location, formData.amount, formData.time, formData.mode],
+    ];
+    const sheetName = "Sheet1";
+    const data = {
+      spreadsheetId,
+      range,
+      values,
+      sheetName,
+    };
+    // console.log("data", data);
+    try {
+      const response = await fetch(writeDateUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
-    const lastRowData = lastRow.result;
+
+      if (response.ok) {
+        alert("Write date Transaction saved successfully!");
+      } else {
+        throw new Error("Transaction save failed");
+      }
+    } catch (error) {
+      alert("Error in write data saving transaction. Please try again later.");
+      console.error("Error saving transaction:", error);
+    }
+    
+    //  make an api call to get the last fill row of the sheet
+    // const lastRow = await fetch(getLastRowUrl, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
+    //     sheetName: "Sheet1",
+    //   }),
+    // })
+    //   .then((response) => {
+    //     // console.log("response2", response);
+    //     if (response.status === 200) {
+    //       console.log("response", response);
+    //       return response.json();
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     alert("Error fetching last row. Please try again later.");
+    //     console.error("Error fetching last row:", error);
+    //   });
+    // const lastRowData = lastRow.result;
     // console.log("lastRowData", lastRowData);
-    const rangeee = `Sheet1!A${lastRowData + 2}:E${lastRowData + 2}`;
+    // const rangeee = `Sheet1!A${lastRowData + 2}:E${lastRowData + 2}`;
     // console.log("lastRowData", rangeee);
 
     // api call for google sheets using fetch method
-    const dataOfSheet = {
-      spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
-      range: rangeee,
-      values: [
-        [formData.location, formData.amount, formData.time, formData.mode , formData.type],
-      ],
-    };
-    const moneyhanlerData = {
-      "location" : formData.location,
-      "amount" :formData.amount,
-      "time" : formData.time,
-      "mode": formData.mode,
-      "type":formData.type
-    }
-    await fetch(moneyhanlerurl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(moneyhanlerData),
-    })
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          // alert("write date Transaction saved successfully!");
-        }
-      })
-      .catch((error) => {
-        alert(
-          "Error  in write data saving transaction. Please try again later."
-        );
-        // console.error("Error saving transaction:", error);
-      });
-    await fetch(writeDateUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataOfSheet),
-    })
-      .then((response) => {
-        if (response.status === 200 || response.status === 201) {
-          // alert("write date Transaction saved successfully!");
-        }
-      })
-      .catch((error) => {
-        alert(
-          "Error  in write data saving transaction. Please try again later."
-        );
-        // console.error("Error saving transaction:", error);
-      })
-      .finally(() => {
-        alert("form has been submitted successfully")
-        setFormData({
-          location: "",
-          amount: "",
-          time: "",
-          mode: "",
-          type:"",
-        });
-      });
+    // const dataOfSheet = {
+    //   spreadsheetId: "1u1P8JTDqWnrSMk38qfbLzWrslqxA2t8tTGLl5r_mFNE",
+    //   range: rangeee,
+    //   values: [
+    //     [
+    //       formData.location,
+    //       formData.amount,
+    //       formData.time,
+    //       formData.mode,
+    //       formData.type,
+    //     ],
+    //   ],
+    // };
+    // const moneyhanlerData = {
+    //   location: formData.location,
+    //   amount: formData.amount,
+    //   time: formData.time,
+    //   mode: formData.mode,
+    //   type: formData.type,
+    // };
+    // await fetch(moneyhanlerurl, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(moneyhanlerData),
+    // })
+    //   .then((response) => {
+    //     if (response.status === 200 || response.status === 201) {
+    //       // alert("write date Transaction saved successfully!");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     alert(
+    //       "Error  in write data saving transaction. Please try again later."
+    //     );
+    //     // console.error("Error saving transaction:", error);
+    //   });
+    // await fetch(writeDateUrl, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(dataOfSheet),
+    // })
+    //   .then((response) => {
+    //     if (response.status === 200 || response.status === 201) {
+    //       // alert("write date Transaction saved successfully!");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     alert(
+    //       "Error  in write data saving transaction. Please try again later."
+    //     );
+    //     // console.error("Error saving transaction:", error);
+    //   })
+    //   .finally(() => {
+    //     alert("form has been submitted successfully");
+    //     setFormData({
+    //       location: "",
+    //       amount: "",
+    //       time: "",
+    //       mode: "",
+    //       type: "",
+    //     });
+    //      setTimeout(() => {
+    //        alert("Form submitted successfully!");
+    //        handleCloseForm();
+    //      }, 500); 
+    //   });
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Money Management Form</h2>
+      <div className="flex justify-between items-center relative bg-gray-100 px-4 py-2 rounded-t-lg shadow-sm">
+        <h2 className=" text-2xl font-bold text-blue-800">
+          Add Expenses
+        </h2>
+        <button
+          type="button"
+          className=" rounded-md bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handleCloseForm}
+        >
+          <svg
+            className="h-6 w-6 text-gray-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
