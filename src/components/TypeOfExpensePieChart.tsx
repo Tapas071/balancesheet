@@ -13,6 +13,7 @@ interface Transaction {
 }
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const TypeOfExpensePieChart: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -20,7 +21,7 @@ const TypeOfExpensePieChart: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/getAllTrans');
+        const response = await fetch(`${BASE_URL}/api/getAllTrans`);
         const data: Transaction[] = await response.json();
         setTransactions(data);
       } catch (error) {

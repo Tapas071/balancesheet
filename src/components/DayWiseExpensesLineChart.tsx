@@ -20,13 +20,15 @@ interface Transaction {
   __v: number;
 }
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 const DayWiseExpensesLineChart: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/getAllTrans');
+        const response = await fetch(`${BASE_URL}/api/getAllTrans`);
         const data: Transaction[] = await response.json();
         setTransactions(data);
       } catch (error) {

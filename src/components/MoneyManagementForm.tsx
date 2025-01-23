@@ -29,7 +29,7 @@ const MoneyManagementForm: React.FC<MoneyManagementFormProps> = ({
     });
   };
 
-  const BASE_URL = "http://localhost:3000";
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
   const writeDateUrl = `${BASE_URL}/api/writedata`;
 
   const handleSubmit = async (e: React.FormEvent) => {
