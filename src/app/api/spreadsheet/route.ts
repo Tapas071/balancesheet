@@ -37,19 +37,24 @@ export async function POST(req: NextRequest, res: NextResponse) {
 }
 
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(req: NextRequest) {
   try {
     await dbConnect();
+    const id = req.nextUrl.searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Spreadsheet ID is required" },
+        { status: 400 }
+      );
+    }
+
     const data = await req.json();
 
-    const updatedSpreadsheet = await Spreadsheet.findByIdAndUpdate(
-      params.id,
-      data,
-      { new: true, runValidators: true }
-    );
+    const updatedSpreadsheet = await Spreadsheet.findByIdAndUpdate(id, data, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedSpreadsheet) {
       return NextResponse.json(
@@ -70,15 +75,20 @@ export async function PUT(
     );
   }
 }
-
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(req: NextRequest) {
   try {
     await dbConnect();
 
-    const deletedSpreadsheet = await Spreadsheet.findByIdAndDelete(params.id);
+    const id = req.nextUrl.searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Spreadsheet ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const deletedSpreadsheet = await Spreadsheet.findByIdAndDelete(id);
 
     if (!deletedSpreadsheet) {
       return NextResponse.json(

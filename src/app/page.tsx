@@ -11,6 +11,8 @@ import ModeOfPaymentPieChart from "@/components/ModeOfPaymentPieChart";
 import PaymentsTable from "@/components/TransTable";
 import AddMoneyFormWrapper from "@/components/AddMoneyFormWrapper";
 import DownloadSpreadsheet from "@/components/DownloadSpreadsheet";
+import SetSpreadsheetForm from "@/components/SetSpreadsheetForm";
+import IncomeWrapper from "@/components/IncomeWrapper";
 
 const Home = () => {
   return (
@@ -18,12 +20,16 @@ const Home = () => {
       <div className=" flex flex-col">
         <Navbar />
         <div className=" mx-auto">
-          <AddMoneyFormWrapper/>
-          <PaymentsTable/>
-          <TypeOfExpensePieChart/>
-          <ModeOfPaymentPieChart/>
-          <DayWiseExpensesLineChart/>
-          <DownloadSpreadsheet/>
+          <div className="flex justify-between m-4 p-6 ">
+            <IncomeWrapper/>
+            <AddMoneyFormWrapper />
+            <SetSpreadsheetForm />
+          </div>
+          <PaymentsTable />
+          <TypeOfExpensePieChart />
+          <ModeOfPaymentPieChart />
+          <DayWiseExpensesLineChart />
+          <DownloadSpreadsheet />
         </div>
         <Footer />
       </div>
